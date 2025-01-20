@@ -100,8 +100,7 @@ if page_selection == "Home":
 # -------------------------------------------------
 ## -------------------------------------------------
 elif page_selection == "Chatbot":
-    with st.spinner("AI is crunching your data...🤖"):
-            time.sleep(3.6)  # Simulate a delay
+    
     st.title("Welcome to AI-Driven RC Beam Size Prediction Chatbot! 🤖")
     
     # Initialize session state variables
@@ -174,6 +173,11 @@ elif page_selection == "Chatbot":
 
     else:
         if not st.session_state.predicted:
+            # Add a waiting period with spinner before displaying results
+            with st.spinner("AI is crunching your data...🤖"):
+                time.sleep(3)  # Wait for 3 seconds
+                
+            # Perform prediction
             total_factored_load = (
                 1.2 * st.session_state.inputs["dead_load"]
                 + 1.6 * st.session_state.inputs["live_load"]
@@ -213,8 +217,10 @@ elif page_selection == "Chatbot":
             st.session_state.predicted = True
 
         # Display the prediction result
-        st.title("AI Powered Prediction")
+        st.subheader("AI Powered Prediction")
         st.subheader(st.session_state.prediction_result)
+        
+        # Reset button
         if st.button("Reset"):
             st.session_state.step = 0
             st.session_state.inputs = {k: None for k in st.session_state.inputs}
