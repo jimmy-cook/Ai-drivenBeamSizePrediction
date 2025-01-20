@@ -100,6 +100,8 @@ if page_selection == "Home":
 # -------------------------------------------------
 ## -------------------------------------------------
 elif page_selection == "Chatbot":
+    with st.spinner("AI is crunching your data...🤖"):
+            time.sleep(3.6)  # Simulate a delay
     st.title("Welcome to AI-Driven RC Beam Size Prediction Chatbot! 🤖")
     
     # Initialize session state variables
@@ -218,7 +220,8 @@ elif page_selection == "Chatbot":
             st.session_state.inputs = {k: None for k in st.session_state.inputs}
             st.session_state.predicted = False
 
-
+    
+       st.image("TFlogo.png")
 # -------------------------------------------------
 # PAGE 3: ABOUT
 # -------------------------------------------------
