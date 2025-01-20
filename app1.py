@@ -43,7 +43,7 @@ if page_selection == "Home":
     st.image("Ailogo.png")
     # --- User Inputs ---
     st.subheader("Material Properties")
-    concrete_grade = st.number_input("Concrete Grade (fc in MPa)", value=25.0)
+    concrete_grade = st.number_input("Concrete Grade (fc in MPa)", value=20.0)
     rebar_grade    = st.number_input("Rebar Grade (fy in MPa)", value=415.0)
 
     st.subheader("Load Inputs")
@@ -51,7 +51,7 @@ if page_selection == "Home":
     live_load = st.number_input("Live Load (kN/m)", value=15)
 
     st.subheader("Span Details")
-    span_length     = st.number_input("Span Length (mm)", value=6000)
+    span_length     = st.number_input("Span Length (mm)", value=5000)
     left_span_ratio = st.number_input("Left Span Ratio", value=1.0)
     right_span_ratio= st.number_input("Right Span Ratio", value=1.0)
 
