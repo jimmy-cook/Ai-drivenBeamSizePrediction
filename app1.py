@@ -103,7 +103,9 @@ if page_selection == "Home":
 # -------------------------------------------------
 
 elif page_selection == "Chatbot":
-    st.title("Welcome to AI-Driven RC Beam Size Prediction Chat bot!🤖")
+    st.title("Welcome to AI-Driven RC Beam Size Prediction Chatbot! 🤖")
+    
+    # Initialize session state variables
     if "step" not in st.session_state:
         st.session_state.step = 0
         st.session_state.inputs = {
@@ -115,7 +117,7 @@ elif page_selection == "Chatbot":
             "left_span_ratio": None,
             "right_span_ratio": None,
             "span_type": None,
-            "optimized": 1
+            "optimized": 1  # Default optimization
         }
         st.session_state.predicted = False
 
@@ -159,13 +161,17 @@ elif page_selection == "Chatbot":
                 st.error("Please enter a valid numeric value.")
                 return
 
-        st.session_state.step += 1
-        st.experimental_rerun()
+        st.session_state.step += 1  # Move to the next question
 
     if st.session_state.step < len(questions):
+        # Display the current question
         question = questions[st.session_state.step]
         st.markdown(f"<h3>{question}</h3>", unsafe_allow_html=True)
-        st.text_input("Your Answer:", key=f"input_{st.session_state.step}", on_change=process_input)
+        st.text_input(
+            "Your Answer:",
+            key=f"input_{st.session_state.step}",
+            on_change=process_input  # Automatically processes when the user submits the answer
+        )
 
     else:
         if not st.session_state.predicted:
@@ -206,16 +212,16 @@ elif page_selection == "Chatbot":
                 f"Width = {predicted_width} mm, Depth = {predicted_depth} mm"
             )
             st.session_state.predicted = True
-            st.experimental_rerun()
 
-        else:
-            st.title("AI Powered Prediction")
-            st.subheader(st.session_state.prediction_result)
-            if st.button("Reset"):
-                st.session_state.step = 0
-                st.session_state.inputs = {k: None for k in st.session_state.inputs}
-                st.session_state.predicted = False
-                st.experimental_rerun()
+        # Display the prediction result
+        st.title("AI Powered Prediction")
+        st.subheader(st.session_state.prediction_result)
+        if st.button("Reset"):
+            st.session_state.step = 0
+            st.session_state.inputs = {k: None for k in st.session_state.inputs}
+            st.session_state.predicted = False
+
+
 
 
 # -------------------------------------------------
