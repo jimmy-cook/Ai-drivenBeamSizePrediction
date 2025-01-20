@@ -220,8 +220,6 @@ elif page_selection == "Chatbot":
             st.session_state.inputs = {k: None for k in st.session_state.inputs}
             st.session_state.predicted = False
 
-    
-   st.image("TFlogo.png")
 # -------------------------------------------------
 # PAGE 3: ABOUT
 # -------------------------------------------------
