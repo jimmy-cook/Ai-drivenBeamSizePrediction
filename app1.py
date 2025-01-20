@@ -104,7 +104,8 @@ if page_selection == "Home":
 
         st.subheader(
             f"**Predicted Cross Section size for RC beam:**\n\n"
-            f"Width = {predicted_width:.2f} mm, Depth = {predicted_depth:.2f} mm"
+            f"Width =  {round(predicted_width)} mm, Depth = {round(predicted_depth)} mm"
+
         )
     st.image("TFlogo.png")
 # -------------------------------------------------
