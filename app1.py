@@ -221,7 +221,7 @@ elif page_selection == "Chatbot":
             st.session_state.predicted = False
 
     
-       st.image("TFlogo.png")
+st.image("TFlogo.png")
 # -------------------------------------------------
 # PAGE 3: ABOUT
 # -------------------------------------------------
