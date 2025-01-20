@@ -104,7 +104,7 @@ if page_selection == "Home":
 
 elif page_selection == "Chatbot":
     st.title("Welcome to AI-Driven RC Beam Size Prediction Chatbot! 🤖")
-    
+
     # Initialize session state variables
     if "step" not in st.session_state:
         st.session_state.step = 0
@@ -143,38 +143,40 @@ elif page_selection == "Chatbot":
         "span_type"
     ]
 
-    def process_input():
-        key = input_keys[st.session_state.step]
-        user_input = st.session_state.get(f"input_{st.session_state.step}", "").strip()
-
-        if key == "span_type":
-            cleaned_input = user_input.lower()
-            if cleaned_input in ["interior", "exterior"]:
-                st.session_state.inputs[key] = 1 if cleaned_input == "interior" else 0
-            else:
-                st.error("Please enter 'interior' or 'exterior' (without quotes).")
-                return
-        else:
-            try:
-                st.session_state.inputs[key] = float(user_input)
-            except ValueError:
-                st.error("Please enter a valid numeric value.")
-                return
-
-        st.session_state.step += 1  # Move to the next question
-
     if st.session_state.step < len(questions):
         # Display the current question
         question = questions[st.session_state.step]
         st.markdown(f"<h3>{question}</h3>", unsafe_allow_html=True)
-        st.text_input(
+
+        # User input
+        user_input = st.text_input(
             "Your Answer:",
-            key=f"input_{st.session_state.step}",
-            on_change=process_input  # Automatically processes when the user submits the answer
+            key=f"input_{st.session_state.step}"
         )
+
+        # Process input
+        if st.button("Next"):
+            key = input_keys[st.session_state.step]
+
+            if key == "span_type":
+                cleaned_input = user_input.lower().strip()
+                if cleaned_input in ["interior", "exterior"]:
+                    st.session_state.inputs[key] = 1 if cleaned_input == "interior" else 0
+                else:
+                    st.error("Please enter 'interior' or 'exterior' (without quotes).")
+            else:
+                try:
+                    st.session_state.inputs[key] = float(user_input)
+                except ValueError:
+                    st.error("Please enter a valid numeric value.")
+                    return
+
+            # Move to the next question
+            st.session_state.step += 1
 
     else:
         if not st.session_state.predicted:
+            # Perform prediction
             total_factored_load = (
                 1.2 * st.session_state.inputs["dead_load"]
                 + 1.6 * st.session_state.inputs["live_load"]
@@ -216,12 +218,12 @@ elif page_selection == "Chatbot":
         # Display the prediction result
         st.title("AI Powered Prediction")
         st.subheader(st.session_state.prediction_result)
+
+        # Reset button
         if st.button("Reset"):
             st.session_state.step = 0
             st.session_state.inputs = {k: None for k in st.session_state.inputs}
             st.session_state.predicted = False
-
-
 
 
 # -------------------------------------------------
