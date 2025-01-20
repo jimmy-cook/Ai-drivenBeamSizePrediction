@@ -148,13 +148,13 @@ elif page_selection == "Chatbot":
         question = questions[st.session_state.step]
         st.markdown(f"<h3>{question}</h3>", unsafe_allow_html=True)
 
-        # User input
+        # Input for the current question
         user_input = st.text_input(
             "Your Answer:",
             key=f"input_{st.session_state.step}"
         )
 
-        # Process input
+        # Process input when "Next" button is clicked
         if st.button("Next"):
             key = input_keys[st.session_state.step]
 
@@ -164,6 +164,7 @@ elif page_selection == "Chatbot":
                     st.session_state.inputs[key] = 1 if cleaned_input == "interior" else 0
                 else:
                     st.error("Please enter 'interior' or 'exterior' (without quotes).")
+                    return
             else:
                 try:
                     st.session_state.inputs[key] = float(user_input)
@@ -175,8 +176,8 @@ elif page_selection == "Chatbot":
             st.session_state.step += 1
 
     else:
+        # Perform prediction after collecting all inputs
         if not st.session_state.predicted:
-            # Perform prediction
             total_factored_load = (
                 1.2 * st.session_state.inputs["dead_load"]
                 + 1.6 * st.session_state.inputs["live_load"]
@@ -201,7 +202,7 @@ elif page_selection == "Chatbot":
             predicted_width = round(prediction_scaled[0][0])
             predicted_depth = round(prediction_scaled[0][1])
 
-            # Check condition for dead load and live load
+            # Apply the condition to adjust prediction values
             if (
                 st.session_state.inputs["dead_load"] > 200
                 and st.session_state.inputs["live_load"] > 100
@@ -219,11 +220,12 @@ elif page_selection == "Chatbot":
         st.title("AI Powered Prediction")
         st.subheader(st.session_state.prediction_result)
 
-        # Reset button
+        # Reset button to restart the chatbot
         if st.button("Reset"):
             st.session_state.step = 0
             st.session_state.inputs = {k: None for k in st.session_state.inputs}
             st.session_state.predicted = False
+
 
 
 # -------------------------------------------------
