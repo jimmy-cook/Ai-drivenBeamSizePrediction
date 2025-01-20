@@ -60,7 +60,7 @@ if page_selection == "Home":
     span_type = 1 if span_type_choice == "Interior" else 0
 
     #st.subheader("Optimization")
-    $opt_checkbox = st.checkbox("Optimized?", value=False)
+    #opt_checkbox = st.checkbox("Optimized?", value=False)
     # If your model logic requires 0 for checked, 1 for unchecked, keep as is:
     optimized = 1# if opt_checkbox else 0
 
