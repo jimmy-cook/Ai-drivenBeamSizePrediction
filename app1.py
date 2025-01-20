@@ -62,7 +62,7 @@ if page_selection == "Home":
     st.subheader("Optimization")
     opt_checkbox = st.checkbox("Optimized?", value=False)
     # If your model logic requires 0 for checked, 1 for unchecked, keep as is:
-    optimized = 0 if opt_checkbox else 1
+    optimized = 1 if opt_checkbox else 0
 
     # Calculate total factored load
     total_factored_load = 1.2 * dead_load + 1.6 * live_load
