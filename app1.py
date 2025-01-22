@@ -129,7 +129,7 @@ elif page_selection == "Chatbot":
         "What is the right span ratio?",
         "Is the span type interior or exterior? (Type interior or exterior without quotes)"
     ]
-
+    
     input_keys = [
         "concrete_grade",
         "rebar_grade",
@@ -140,7 +140,7 @@ elif page_selection == "Chatbot":
         "right_span_ratio",
         "span_type"
     ]
-
+    st.write ("This app is only for the preliminary design")
     def process_input():
         key = input_keys[st.session_state.step]
         user_input = st.session_state.get(f"input_{st.session_state.step}", "").strip()
@@ -217,9 +217,9 @@ elif page_selection == "Chatbot":
             st.session_state.predicted = True
 
         # Display the prediction result
-        st.subheader("AI Powered Prediction")
-        st.subheader(st.session_state.prediction_result)
         
+        st.subheader(st.session_state.prediction_result)
+        st.write("AI Powered Prediction 🤖")
         # Reset button
         if st.button("Reset"):
             st.session_state.step = 0
