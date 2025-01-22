@@ -215,11 +215,12 @@ elif page_selection == "Chatbot":
                 f"Width = {predicted_width} mm, Depth = {predicted_depth} mm"
             )
             st.session_state.predicted = True
-        st.write ("This app is only for the preliminary design")
+       
         # Display the prediction result
         
         st.subheader(st.session_state.prediction_result)
         st.write("AI Powered Prediction 🧠")
+        
         # Reset button
         if st.button("Reset"):
             st.session_state.step = 0
