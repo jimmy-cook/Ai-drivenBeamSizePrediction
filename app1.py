@@ -140,7 +140,7 @@ elif page_selection == "Chatbot":
         "right_span_ratio",
         "span_type"
     ]
-    st.write ("This app is only for the preliminary design")
+    
     def process_input():
         key = input_keys[st.session_state.step]
         user_input = st.session_state.get(f"input_{st.session_state.step}", "").strip()
@@ -215,11 +215,11 @@ elif page_selection == "Chatbot":
                 f"Width = {predicted_width} mm, Depth = {predicted_depth} mm"
             )
             st.session_state.predicted = True
-
+        st.write ("This app is only for the preliminary design")
         # Display the prediction result
         
         st.subheader(st.session_state.prediction_result)
-        st.write("AI Powered Prediction 🤖")
+        st.write("AI Powered Prediction 🧠")
         # Reset button
         if st.button("Reset"):
             st.session_state.step = 0
