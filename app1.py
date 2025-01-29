@@ -87,7 +87,7 @@ if page_selection == "Home":
 
             
             # Extra condition if needed
-            if dead_load > 200 and live_load > 100:
+            if dead_load > 100 and live_load > 100:
                 predicted_width *= 1.1164
                 predicted_depth *= 1.35
 
@@ -204,7 +204,7 @@ elif page_selection == "Chatbot":
 
             # Check condition for dead load and live load
             if (
-                st.session_state.inputs["dead_load"] > 200
+                st.session_state.inputs["dead_load"] > 100
                 and st.session_state.inputs["live_load"] > 100
             ):
                 predicted_width = round(predicted_width * 1.1164)
